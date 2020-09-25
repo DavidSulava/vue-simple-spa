@@ -48,7 +48,7 @@ export const checkUserSessionAction = async (context, path = '/users/checkUser')
         headers: {
             // 'Content-Type': 'application/x-www-form-urlencoded',
             'X-Requested-With': 'XMLHttpRequest',
-            "withCredentials ": "true"
+            "withCredentials ": true
         },
         credentials: 'include',
         // body: formData
