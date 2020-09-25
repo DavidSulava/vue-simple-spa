@@ -43,9 +43,6 @@ export const checkUserSessionAction = async (context, path = '/users/checkUser')
 
     let corsAPI = `${process.env.VUE_APP_DATA_API}${path}`;
 
-    // var formData = new FormData();
-    // formData.append('data_l', JSON.stringify(context.state.data_l));
-
     const myHeaders = {
         method: 'GET',
         headers: {
