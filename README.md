@@ -1,24 +1,15 @@
-# client
+# Descrption
+SPA
 
-## Project setup
-```
-npm install
-```
+API здесь 👉 https://github.com/DavidSulava/BackEndApiExpressWithSessions
 
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
+login: admin@gmail.com
+password: 11111111
 
-### Compiles and minifies for production
-```
-npm run build
-```
+Реализовано с помощью Vue js
 
-### Lints and fixes files
+## Stack
 ```
-npm run lint
-```
+Vue js( Vuex, Vuetify )
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+```
