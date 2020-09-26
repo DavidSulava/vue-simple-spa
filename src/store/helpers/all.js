@@ -32,8 +32,8 @@ export const setBills = ( state, payload = null )=>{
 export const setCalls = ( state, payload = null )=>{
     state.calls  = payload ;
 }
-export const setIsDataLoading = ( state  )=>{
-    state.isDataLoading  = !state.isDataLoading ;
+export const setIsDataLoading = ( state, manualSet = false  )=>{
+    state.isDataLoading  = manualSet ;
 }
 
 
@@ -42,16 +42,16 @@ export const setIsDataLoading = ( state  )=>{
 export const checkUserSessionAction = async (context, path = '/users/checkUser') => {
 
     let corsAPI = `${process.env.VUE_APP_DATA_API}${path}`;
+    let jwt = (context.state.user && context.state.user.jwt) && context.state.user.jwt
 
     const myHeaders = {
         method: 'GET',
         headers: {
             // 'Content-Type': 'application/x-www-form-urlencoded',
             'X-Requested-With': 'XMLHttpRequest',
-            // credentials: 'include',
+            "Authorization": jwt,
         },
         credentials: 'include',
-        // body: formData
     };
 
     const response = await fetch(corsAPI, myHeaders);
@@ -74,7 +74,6 @@ export const loginAction = async (context, payload) => {
     const myHeaders = {
         method: 'POST',
         headers: {
-            // 'Content-Type': 'application/x-www-form-urlencoded',
             'X-Requested-With': 'XMLHttpRequest',
         },
         credentials: 'include',
@@ -82,7 +81,7 @@ export const loginAction = async (context, payload) => {
     };
 
     //--loading
-    context.commit('setIsDataLoading');
+    context.commit('setIsDataLoading', true);
 
     const response = await fetch(corsAPI, myHeaders);
 
@@ -122,11 +121,13 @@ export const loginAction = async (context, payload) => {
 export const emailVerifyAction = async (context, payload) => {
 
     let corsAPI = `${process.env.VUE_APP_DATA_API}${payload.path}`;
+    let jwt = (context.state.user && context.state.user.jwt) && context.state.user.jwt
 
     const myHeaders = {
         method: 'GET',
         headers: {
             'X-Requested-With': 'XMLHttpRequest',
+            "Authorization": jwt,
         },
         credentials: 'include',
     };
@@ -153,18 +154,19 @@ export const emailVerifyAction = async (context, payload) => {
 export const getUserData = async (context, payload ) => {
 
     let corsAPI = `${process.env.VUE_APP_DATA_API}${payload.path}`;
+    let jwt = (context.state.user && context.state.user.jwt) && context.state.user.jwt
 
     const myHeaders = {
         method: 'GET',
         headers: {
-            // 'Content-Type': 'application/x-www-form-urlencoded',
             'X-Requested-With': 'XMLHttpRequest',
+            "Authorization": jwt,
         },
         credentials: 'include',
-        // body: formData
+
     };
     //--loading
-    context.commit('setIsDataLoading');
+    context.commit('setIsDataLoading', true);
 
     const response = await fetch(corsAPI, myHeaders);
     const data = await response.json();
