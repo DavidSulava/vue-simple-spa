@@ -42,14 +42,12 @@ export const setIsDataLoading = ( state, manualSet = false  )=>{
 export const checkUserSessionAction = async (context, path = '/users/checkUser') => {
 
     let corsAPI = `${process.env.VUE_APP_DATA_API}${path}`;
-    let jwt = (context.state.user && context.state.user.jwt) && context.state.user.jwt
 
     const myHeaders = {
         method: 'GET',
         headers: {
             // 'Content-Type': 'application/x-www-form-urlencoded',
             'X-Requested-With': 'XMLHttpRequest',
-            "Authorization": jwt,
         },
         credentials: 'include',
     };
