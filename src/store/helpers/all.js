@@ -69,8 +69,8 @@ export const autoRefresh  = async (context ) => {
 
     const { state, dispatch } = context;
 
-    const { jwt_time_start } = state.user
-    let timeUntilRefresh = Math.floor( ( jwt_time_start - Date.now() ) - (1000 * 60 * 1.2) )
+    const { jwt_time_expires } = state.user
+    let timeUntilRefresh = Math.floor( ( jwt_time_expires - Date.now() ) - (1000 * 60 * 1.2) )
 
     var waitAlitle = null
     var refresh = null
