@@ -13,7 +13,7 @@ import {
   checkUserSessionAction,
   loginAction,
   emailVerifyAction,
-  getUserData,
+  getUserDataAction,
   autoRefresh,
 } from './helpers/all'
 
@@ -40,7 +40,7 @@ export const store = new Vuex.Store({
     //  В этой сеуции приложение могло бы сделать запрос к API. После этого сделать мутацию.
     checkUserSessionAction,
     loginAction,
-    getUserData,
+    getUserDataAction,
     emailVerifyAction,
     autoRefresh
   }

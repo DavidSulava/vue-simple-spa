@@ -16,6 +16,9 @@ export default {
   components: {
     NavBar,
   },
+  beforeCreate(){
+    this.$store.dispatch('checkUserSessionAction')
+  },
 
 };
 </script>

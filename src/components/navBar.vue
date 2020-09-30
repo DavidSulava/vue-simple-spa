@@ -84,9 +84,6 @@
         snackbar: {show: false, timeout: 3000, snackText : '', color:'error'},
       };
     },
-    created(){
-      this.checkSession
-    },
     methods: {
 
       toRegister(){
@@ -106,9 +103,6 @@
           else if(index>0 && this.user)
             return true
         } )
-      },
-      checkSession(){
-        return this.$store.dispatch('checkUserSessionAction')
       },
       ...mapGetters(['getMsgServer']),
       ...mapState(['user'])

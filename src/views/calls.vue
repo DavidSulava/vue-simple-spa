@@ -25,7 +25,7 @@
 
     <v-pagination
         class='mt-10'
-        v-if='calls && !calls.calls.lenght '
+        v-if='calls && calls.calls.length '
         v-model="goToPage"
         :length="calls.totalPages"
         :page="pagination.page"
@@ -59,7 +59,7 @@ export default {
     }
   },
   created(){
-    this.$store.dispatch('getUserData', { path:this.path + 1 });
+    this.$store.dispatch('getUserDataAction', { path:this.path + 1 });
   },
   computed:{
     ...mapState(['calls', 'isDataLoading', 'user']),
@@ -68,7 +68,7 @@ export default {
           return parseInt(this.calls.page)
         },
         set(val){
-          return this.$store.dispatch('getUserData', { path:this.path + val });
+          return this.$store.dispatch('getUserDataAction', { path:this.path + val });
         }
     },
   },

@@ -25,7 +25,7 @@
 
     <v-pagination
         class='mt-10'
-        v-if='bills && !bills.bills.lenght'
+        v-if='bills && bills.bills.length'
         v-model="goToPage"
         :length="bills.totalPages"
         :page="pagination.page"
@@ -48,8 +48,6 @@ export default {
     return {
       tableHeaders:['Адресс', 'Описание счета', 'Создан', 'Сумма'],
       pagination:{
-        circle: true,
-        disabled: false,
         length: 5,
         page: 1,
         totalVisible: 5,
@@ -57,8 +55,8 @@ export default {
       path:"/bills?page="
     }
   },
-  created(){
-    this.$store.dispatch('getUserData', { path:this.path + 1 });
+  mounted(){
+    this.$store.dispatch('getUserDataAction', { path:this.path + 1 });
   },
   computed:{
     ...mapState(['bills', 'isDataLoading', 'user']),
@@ -67,7 +65,7 @@ export default {
             return parseInt(this.bills.page)
         },
         set(val){
-            return this.$store.dispatch('getUserData', { path:this.path + val });
+            return this.$store.dispatch('getUserDataAction', { path:this.path + val });
         }
     },
   },
@@ -79,3 +77,4 @@ export default {
   }
 };
 </script>
+

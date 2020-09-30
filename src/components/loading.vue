@@ -1,7 +1,7 @@
 <template>
-  <v-container class=' align-center' >
+  <v-container class='align-center progressBar' height="25" >
 
-    <div style="min-height: 4px;">
+    <div>
         <v-progress-linear
             indeterminate
             color="green">
@@ -18,3 +18,11 @@
 
   }
 </script>
+
+<style>
+  .progressBar {
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%, -20px);
+  }
+</style>

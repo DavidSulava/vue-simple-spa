@@ -18,6 +18,11 @@ export const getMsgServer = state => {
 
 // -------[ mutations ]----------
 export const checkUserSession = (state, payload = null) => {
+    // let storageRefreshToken = JSON.parse(localStorage.getItem('RefreshToken ') || '{}');
+	// if( !Object.keys(storageRefreshToken).length )
+	// 	{
+	// 		localStorage.setItem("RefreshToken ", JSON.stringify(initState));
+	// 	}
     state.user = payload;
 }
 export const login = (state, payload = []) => {
@@ -39,7 +44,7 @@ export const setIsDataLoading = ( state, manualSet = false  )=>{
 
 // -------[ Actions ]-------
 
-export const checkUserSessionAction = async (context, path = '/users/checkUser') => {
+export const checkUserSessionAction = async (context, path = '/users/jwt_refresh') => {
 
     let corsAPI = `${process.env.VUE_APP_DATA_API}${path}`;
 
@@ -52,14 +57,18 @@ export const checkUserSessionAction = async (context, path = '/users/checkUser')
         credentials: 'include',
     };
 
+    context.commit('setIsDataLoading', true);
+
     const response = await fetch(corsAPI, myHeaders);
     const data = await response.json();
 
     if (data && data.user) {
         context.commit('checkUserSession', data.user);
+        context.commit('setIsDataLoading');
         context.dispatch('autoRefresh');
     } else {
         context.commit('checkUserSession');
+        context.commit('setIsDataLoading');
     }
 
 }
@@ -79,7 +88,7 @@ export const autoRefresh  = async (context ) => {
     }
     else{
         clearTimeout(waitAlitle);
-        refresh=  setTimeout(() => dispatch('checkUserSessionAction', '/users/jwt_refresh' ), timeUntilRefresh );
+        refresh=  setTimeout(() => dispatch('checkUserSessionAction' ), timeUntilRefresh );
     }
 
 
@@ -171,8 +180,7 @@ export const emailVerifyAction = async (context, payload) => {
 }
 
 
-
-export const getUserData = async (context, payload ) => {
+export const getUserDataAction = async (context, payload ) => {
 
     let corsAPI = `${process.env.VUE_APP_DATA_API}${payload.path}`;
     let jwt = (context.state.user && context.state.user.jwt) && context.state.user.jwt
@@ -184,26 +192,34 @@ export const getUserData = async (context, payload ) => {
             "Authorization": jwt,
         },
         credentials: 'include',
-
     };
-    //--loading
-    context.commit('setIsDataLoading', true);
 
-    const response = await fetch(corsAPI, myHeaders);
-    const data = await response.json();
+    var wait = null
 
-    if (data && 'bills' in data) {
-        context.commit('setBills', data);
-        context.commit('setIsDataLoading');
-    } else if(data && 'calls' in data){
-        context.commit('setCalls', data);
-        context.commit('setIsDataLoading');
-    } else {
-        context.commit('setBills');
-        context.commit('setCalls');
-        context.commit('setIsDataLoading');
+    if( context.state.isDataLoading ){
+        wait = setTimeout(() => context.dispatch('getUserDataAction', payload), 1000);
     }
+    else{
+        clearTimeout(wait);
 
+        //--loading
+        context.commit('setIsDataLoading', true);
+
+        const response = await fetch(corsAPI, myHeaders);
+        const data = await response.json();
+
+        if (data && data.bills) {
+            context.commit('setBills', data);
+            context.commit('setIsDataLoading');
+        } else if(data && 'calls' in data){
+            context.commit('setCalls', data);
+            context.commit('setIsDataLoading');
+        } else {
+            context.commit('setBills');
+            context.commit('setCalls');
+            context.commit('setIsDataLoading');
+        }
+    }
 }
 
 
