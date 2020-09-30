@@ -2,14 +2,14 @@
  <v-container >
     <v-app-bar :hide-on-scroll='true' flat class='orange' app>
         <!-- Логотип -->
-        <v-toolbar-title class="text-uppercase">
+        <v-toolbar-title class="text-uppercase hidden-xs-only">
             <i>Express</i>
             <span class='font-weight-black'>
               App
             </span>
         </v-toolbar-title>
 
-        <v-list class='ml-10 orange text--darken-5 d-flex' :dark='true' >
+        <v-list class='ml-md-10 py-1 orange text--darken-5 d-flex' :dark='true' >
           <v-list-item v-for='link in allowedLinks' :key="link.name" class='white--text ml-2' router :to="link.path" :exact='true' >
             <v-list-item-content>
               <v-list-item-title>

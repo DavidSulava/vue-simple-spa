@@ -1,5 +1,5 @@
 <template>
-  <v-container class="col-8">
+  <v-container class="col-xs-11 col-md-8">
     <v-form
       ref="userCredentials"
       class="grey lighten-2 pa-5 rounded elevation-2"

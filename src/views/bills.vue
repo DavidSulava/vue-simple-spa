@@ -3,22 +3,22 @@
 
     <Loading  v-show='isDataLoading'/>
 
-    <v-simple-table dark v-if='bills'>
+    <v-simple-table dark v-if='bills' >
         <thead>
-          <tr>
-            <th class="text-left" v-for='obKeys in tableHeaders' :key="obKeys">
+          <tr >
+            <th class="text-left pa-1 pa-sm-3 text-caption text-sm-body-2" v-for='obKeys in tableHeaders' :key="obKeys">
                 {{obKeys}}
             </th>
 
           </tr>
         </thead>
 
-         <tbody>
+         <tbody >
           <tr v-for="item in bills.bills" :key="item._id.bill_id">
-            <td>{{ item._id.address }}</td>
-            <td>{{ item._id.bill_description }}</td>
-            <td>{{ item._id.created }}</td>
-            <td>{{ item._id.total_sum }}</td>
+            <td class='pa-1 pa-sm-3 text-caption text-sm-body-2' >{{ item._id.address }}</td>
+            <td class='pa-1 pa-sm-3 text-caption text-sm-body-2' >{{ item._id.bill_description }}</td>
+            <td class='pa-1 pa-sm-3 text-caption text-sm-body-2'>{{ item._id.created }}</td>
+            <td class='pa-1 pa-sm-3 text-caption text-sm-body-2'>{{ item._id.total_sum }}</td>
           </tr>
         </tbody>
     </v-simple-table>

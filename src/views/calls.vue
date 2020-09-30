@@ -6,7 +6,7 @@
     <v-simple-table dark v-if='calls'>
         <thead>
           <tr>
-            <th class="text-left" v-for='obKeys in tableHeaders' :key="obKeys">
+            <th class="text-left pa-1 pa-sm-3 text-caption text-sm-body-2" v-for='obKeys in tableHeaders' :key="obKeys">
                 {{obKeys}}
             </th>
 
@@ -15,10 +15,10 @@
 
          <tbody>
           <tr v-for="item in calls.calls" :key="item._id.calls_id">
-            <td>{{ item._id.tariff_name }}</td>
-            <td>{{ item._id.line_city }}</td>
-            <td>{{ item._id.created }}</td>
-            <td>{{ item._id.outgoing_cost }}</td>
+            <td class='pa-1 pa-sm-3 text-caption text-sm-body-2'>{{ item._id.tariff_name }}</td>
+            <td class='pa-1 pa-sm-3 text-caption text-sm-body-2'>{{ item._id.line_city }}</td>
+            <td class='pa-1 pa-sm-3 text-caption text-sm-body-2'>{{ item._id.created }}</td>
+            <td class='pa-1 pa-sm-3 text-caption text-sm-body-2'>{{ item._id.outgoing_cost }}</td>
           </tr>
         </tbody>
     </v-simple-table>
