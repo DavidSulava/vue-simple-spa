@@ -1,5 +1,5 @@
 # Descrption
-SPA
+SPA ( аутентификация через JWT )
 
 EXPRESS API здесь  https://github.com/DavidSulava/BackEndApiExpressWithSessions
 
