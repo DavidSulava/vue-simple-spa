@@ -1,7 +1,7 @@
 # Descrption
 SPA ( аутентификация через JWT )
 
-EXPRESS API здесь  https://github.com/DavidSulava/BackEndApiExpressWithSessions
+EXPRESS API здесь  https://github.com/DavidSulava/BackEndApiExpressWithSessions/tree/jwt-v
 
 Демку можно посмотреть тут 👉 https://davidsulava.github.io/vue-simple-spa/
 
