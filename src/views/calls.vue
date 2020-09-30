@@ -1,8 +1,6 @@
 <template>
   <v-container class=' align-center' >
 
-    <Loading v-show='isDataLoading'/>
-
     <v-simple-table dark v-if='calls'>
         <thead>
           <tr>
@@ -38,12 +36,9 @@
 
 <script>
 import { mapState } from "vuex";
-import Loading from "../components/loading"
 
 export default {
   name: "Calls",
-
-  components: {Loading},
 
   data() {
     return {
@@ -62,7 +57,7 @@ export default {
     this.$store.dispatch('getUserDataAction', { path:this.path + 1 });
   },
   computed:{
-    ...mapState(['calls', 'isDataLoading', 'user']),
+    ...mapState(['calls', 'user']),
     goToPage:{
         get(){
           return parseInt(this.calls.page)

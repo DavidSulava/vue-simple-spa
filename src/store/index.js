@@ -14,6 +14,7 @@ import {
   loginAction,
   emailVerifyAction,
   getUserDataAction,
+  logOutAction,
   autoRefresh,
 } from './helpers/all'
 
@@ -42,6 +43,7 @@ export const store = new Vuex.Store({
     loginAction,
     getUserDataAction,
     emailVerifyAction,
-    autoRefresh
+    autoRefresh,
+    logOutAction
   }
 })

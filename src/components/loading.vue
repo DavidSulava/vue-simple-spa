@@ -22,7 +22,8 @@
 <style>
   .progressBar {
     position: absolute;
+    top:15px;
     left: 50%;
-    transform: translate(-50%, -20px);
+    transform: translate(-50%, 0);
   }
 </style>

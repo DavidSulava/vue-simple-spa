@@ -1,8 +1,6 @@
 <template>
   <v-form ref='loginForm' class="white pa-4"  @submit.prevent="login">
 
-    <Loading v-if='isDataLoading'/>
-
     <!-- Эл.почта -->
     <v-text-field
         name='email'
@@ -45,13 +43,11 @@
 </template>
 
 <script>
-    import {  mapGetters, mapState } from 'vuex';
-    import Loading from "../components/loading";
+    import {  mapGetters } from 'vuex';
 
 
     export default {
         name: 'LoginForm',
-        components: {Loading},
 
         props: {
             toRegister: { type: Function },
@@ -135,7 +131,6 @@
 
             },
             ...mapGetters(['getMsgServer']),
-            ...mapState(['isDataLoading']),
         },
 
     }

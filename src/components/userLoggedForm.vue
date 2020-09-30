@@ -39,7 +39,7 @@ export default {
   },
   methods: {
     logOut() {
-      this.$store.dispatch("checkUserSessionAction", this.path);
+      this.$store.dispatch("logOutAction", this.path  );
     },
   },
   watch: {},

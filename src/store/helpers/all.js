@@ -148,6 +148,45 @@ export const loginAction = async (context, payload) => {
     }
 }
 
+export const logOutAction = async (context, payload) => {
+
+    let corsAPI = `${process.env.VUE_APP_DATA_API}${payload}`;
+    let jwt = (context.state.user && context.state.user.jwt) && context.state.user.jwt
+
+    const myHeaders = {
+        method: 'GET',
+        headers: {
+            'X-Requested-With': 'XMLHttpRequest',
+            "Authorization": jwt,
+        },
+        credentials: 'include',
+    };
+
+    //--loading
+    context.commit('setIsDataLoading', true);
+
+    const response = await fetch(corsAPI, myHeaders);
+
+    let data = '';
+
+    if (response.status >= 200 && response.status <= 299) {
+        data = await response.json();
+
+        if (data && data.user && data.user == null ) {
+            context.commit('login',);
+            context.commit('setIsDataLoading');
+        }else {
+            context.commit('login');
+            context.commit('setIsDataLoading');
+        }
+    } else if (response.status === 401) {
+        let regErrors = await response.json();
+
+        context.commit('msgServer', regErrors.msg);
+        context.commit('setIsDataLoading');
+    }
+}
+
 export const emailVerifyAction = async (context, payload) => {
 
     let corsAPI = `${process.env.VUE_APP_DATA_API}${payload.path}`;
