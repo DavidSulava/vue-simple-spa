@@ -1,24 +1,17 @@
-# client
+# Descrption
+SPA
 
-## Project setup
-```
-npm install
-```
+EXPRESS API здесь  https://github.com/DavidSulava/BackEndApiExpressWithSessions
 
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
+Демку можно посмотреть тут 👉 https://davidsulava.github.io/vue-simple-spa/
 
-### Compiles and minifies for production
-```
-npm run build
-```
+login: admin@gmail.com
+password: 11111111
 
-### Lints and fixes files
-```
-npm run lint
-```
+Реализовано с помощью Vue js
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+## Stack
+```
+Vue js( Vuex, Vuetify )
+
+```
