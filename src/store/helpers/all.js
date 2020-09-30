@@ -3,7 +3,7 @@ export const init_state = {
     msgServer:null,
     bills:null,
     calls:null,
-    isDataLoading:false
+    isDataLoading:false,
 }
 
 
@@ -57,11 +57,33 @@ export const checkUserSessionAction = async (context, path = '/users/checkUser')
     const response = await fetch(corsAPI, myHeaders);
     const data = await response.json();
 
-    if (data && 'user' in data) {
+    if (data && data.user) {
         context.commit('checkUserSession', data.user);
+        context.dispatch('autoRefresh');
     } else {
         context.commit('checkUserSession');
     }
+
+}
+export const autoRefresh  = async (context ) => {
+
+    const { state, dispatch } = context;
+
+    const { jwt_time_start } = state.user
+    let timeUntilRefresh = Math.floor( ( jwt_time_start - Date.now() ) - (1000 * 60 * 1.2) )
+
+    var waitAlitle = null
+    var refresh = null
+
+    if( state.isDataLoading ){
+        clearTimeout(refresh);
+        waitAlitle =  setTimeout(() => dispatch('autoRefresh'), 2000);
+    }
+    else{
+        clearTimeout(waitAlitle);
+        refresh=  setTimeout(() => dispatch('checkUserSessionAction', '/users/jwt_refresh' ), timeUntilRefresh );
+    }
+
 
 }
 
@@ -94,6 +116,7 @@ export const loginAction = async (context, payload) => {
             context.commit('login', data);
             context.commit('msgServer', data.msg);
             context.commit('setIsDataLoading');
+            context.dispatch('autoRefresh');
         }else if (data.msg && (data.msg.userUpdated )) {
             context.commit('login', data);
             context.commit('msgServer', data.msg);
