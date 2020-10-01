@@ -6,7 +6,7 @@ EXPRESS API здесь  https://github.com/DavidSulava/BackEndApiExpressWithSess
 Демку можно посмотреть тут 👉 https://davidsulava.github.io/vue-simple-spa/
 
 login: admin@gmail.com\
-password: 11111111\
+password: 11111111
 
 Реализовано с помощью Vue js
 
