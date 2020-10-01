@@ -18,11 +18,6 @@ export const getMsgServer = state => {
 
 // -------[ mutations ]----------
 export const checkUserSession = (state, payload = null) => {
-    // let storageRefreshToken = JSON.parse(localStorage.getItem('RefreshToken ') || '{}');
-	// if( !Object.keys(storageRefreshToken).length )
-	// 	{
-	// 		localStorage.setItem("RefreshToken ", JSON.stringify(initState));
-	// 	}
     state.user = payload;
 }
 export const login = (state, payload = []) => {
@@ -100,10 +95,13 @@ export const loginAction = async (context, payload) => {
     let corsAPI = `${process.env.VUE_APP_DATA_API}${payload.path}`;
     let r_body = payload.form;
 
+    let jwt = context.state.user  && context.state.user.jwt
+
     const myHeaders = {
         method: 'POST',
         headers: {
             'X-Requested-With': 'XMLHttpRequest',
+            "Authorization": jwt,
         },
         credentials: 'include',
         body: r_body
@@ -151,7 +149,7 @@ export const loginAction = async (context, payload) => {
 export const logOutAction = async (context, payload) => {
 
     let corsAPI = `${process.env.VUE_APP_DATA_API}${payload}`;
-    let jwt = (context.state.user && context.state.user.jwt) && context.state.user.jwt
+    let jwt = context.state.user && context.state.user.jwt
 
     const myHeaders = {
         method: 'GET',
@@ -190,7 +188,7 @@ export const logOutAction = async (context, payload) => {
 export const emailVerifyAction = async (context, payload) => {
 
     let corsAPI = `${process.env.VUE_APP_DATA_API}${payload.path}`;
-    let jwt = (context.state.user && context.state.user.jwt) && context.state.user.jwt
+    let jwt = context.state.user && context.state.user.jwt
 
     const myHeaders = {
         method: 'GET',
@@ -222,7 +220,7 @@ export const emailVerifyAction = async (context, payload) => {
 export const getUserDataAction = async (context, payload ) => {
 
     let corsAPI = `${process.env.VUE_APP_DATA_API}${payload.path}`;
-    let jwt = (context.state.user && context.state.user.jwt) && context.state.user.jwt
+    let jwt = context.state.user && context.state.user.jwt
 
     const myHeaders = {
         method: 'GET',

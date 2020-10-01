@@ -77,6 +77,7 @@
 
     <!-- SnackBar -->
     <v-snackbar
+        class="snackBar"
         v-model="snackbar.show"
         :absolute='true'
         :timeout="snackbar.timeout"
@@ -144,12 +145,11 @@ export default {
       this.$store.dispatch("loginAction", { path: this.path[0], form: formD });
     },
     changePassword(){
-        if (!this.$refs.userCredentials.validate()) return;
+        if (!this.$refs.passChangeForm.validate()) return;
 
         let formD = new FormData(this.$refs.passChangeForm.$el);
 
         this.$store.dispatch("loginAction", { path: this.path[1], form: formD });
-
     },
     verifyEmail(){
       this.$store.dispatch("emailVerifyAction", { path: this.path[2] + `email=${this.user.email}` });
