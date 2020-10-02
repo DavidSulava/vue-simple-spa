@@ -1,14 +1,14 @@
 # Descrption
 SPA ( аутентификация через JWT )
 
-EXPRESS API здесь  https://github.com/DavidSulava/BackEndApiExpressWithSessions/tree/jwt-v
+##### EXPRESS API [здесь](https://github.com/DavidSulava/BackEndApiExpressWithSessions/tree/jwt-v)
 
 Демку можно посмотреть тут 👉 https://davidsulava.github.io/vue-simple-spa/
 
-login: admin@gmail.com\
-password: 11111111
+__login__: admin@gmail.com\
+__password__: 11111111
 
-Реализовано с помощью Vue js
+Реализовано с помощью __Vue js__
 
 ## Stack
 ```
