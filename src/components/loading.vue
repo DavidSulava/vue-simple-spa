@@ -15,15 +15,14 @@
 <script>
   export default {
     name: "Loading",
-
   }
 </script>
 
 <style>
   .progressBar {
-    position: absolute;
-    top:15px;
-    left: 50%;
-    transform: translate(-50%, 0);
+    position  : absolute;
+    top       : 15px;
+    left      : 50%;
+    transform : translate(-50%, 0);
   }
 </style>

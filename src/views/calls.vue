@@ -43,12 +43,12 @@ export default {
   data() {
     return {
       tableHeaders:['Тариф', 'Город', 'Создан', 'Цена'],
-      pagination:{
-        circle: true,
-        disabled: false,
-        length: 5,
-        page: 1,
-        totalVisible: 10,
+      pagination  :{
+        circle       : true,
+        disabled     : false,
+        length       : 5,
+        page         : 1,
+        totalVisible : 10
       },
       path:"/calls?page="
     }

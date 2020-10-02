@@ -1,9 +1,9 @@
 export const init_state = {
-    user: null,
-    msgServer:null,
-    bills:null,
-    calls:null,
-    isDataLoading:false,
+    user          : null,
+    msgServer     : null,
+    bills         : null,
+    calls         : null,
+    isDataLoading : false,
 }
 
 
@@ -44,9 +44,8 @@ export const checkUserSessionAction = async (context, path = '/users/jwt_refresh
     let corsAPI = `${process.env.VUE_APP_DATA_API}${path}`;
 
     const myHeaders = {
-        method: 'GET',
+        method : 'GET',
         headers: {
-            // 'Content-Type': 'application/x-www-form-urlencoded',
             'X-Requested-With': 'XMLHttpRequest',
         },
         credentials: 'include',
@@ -69,13 +68,13 @@ export const checkUserSessionAction = async (context, path = '/users/jwt_refresh
 }
 export const autoRefresh  = async (context ) => {
 
-    const { state, dispatch } = context;
-
+    const { state, dispatch }  = context;
     const { jwt_time_expires } = state.user
+
     let timeUntilRefresh = Math.floor( ( jwt_time_expires - Date.now() ) - (1000 * 60 * 1.2) )
 
     var waitAlitle = null
-    var refresh = null
+    var refresh    = null
 
     if( state.isDataLoading ){
         clearTimeout(refresh);
@@ -85,26 +84,24 @@ export const autoRefresh  = async (context ) => {
         clearTimeout(waitAlitle);
         refresh=  setTimeout(() => dispatch('checkUserSessionAction' ), timeUntilRefresh );
     }
-
-
 }
 
 //--логин || регистрация || изменение данных пользователя
 export const loginAction = async (context, payload) => {
 
     let corsAPI = `${process.env.VUE_APP_DATA_API}${payload.path}`;
-    let r_body = payload.form;
+    let r_body  = payload.form;
 
     let jwt = context.state.user  && context.state.user.jwt
 
     const myHeaders = {
-        method: 'POST',
+        method : 'POST',
         headers: {
             'X-Requested-With': 'XMLHttpRequest',
-            "Authorization": jwt,
+            "Authorization"   : jwt,
         },
-        credentials: 'include',
-        body: r_body
+        credentials : 'include',
+        body        : r_body
     };
 
     //--loading
@@ -152,10 +149,10 @@ export const logOutAction = async (context, payload) => {
     let jwt = context.state.user && context.state.user.jwt
 
     const myHeaders = {
-        method: 'GET',
+        method : 'GET',
         headers: {
-            'X-Requested-With': 'XMLHttpRequest',
-            "Authorization": jwt,
+            'X-Requested-With' : 'XMLHttpRequest',
+            "Authorization"    : jwt             ,
         },
         credentials: 'include',
     };
@@ -191,16 +188,16 @@ export const emailVerifyAction = async (context, payload) => {
     let jwt = context.state.user && context.state.user.jwt
 
     const myHeaders = {
-        method: 'GET',
+        method : 'GET',
         headers: {
-            'X-Requested-With': 'XMLHttpRequest',
-            "Authorization": jwt,
+            'X-Requested-With' : 'XMLHttpRequest',
+            "Authorization"    : jwt             ,
         },
         credentials: 'include',
     };
 
     const response = await fetch(corsAPI, myHeaders);
-    const data = await response.json();
+    const data     = await response.json();
 
     let serverResp = data.msg && data.msg.emailConfirmed || data.msg.timeErr || data.msg.errorCred || data.msg.verLinkSend ? data.msg : false;
 
@@ -213,20 +210,19 @@ export const emailVerifyAction = async (context, payload) => {
     }else {
         context.commit('checkUserSession');
     }
-
 }
 
 
 export const getUserDataAction = async (context, payload ) => {
 
     let corsAPI = `${process.env.VUE_APP_DATA_API}${payload.path}`;
-    let jwt = context.state.user && context.state.user.jwt
+    let jwt     = context.state.user && context.state.user.jwt
 
     const myHeaders = {
-        method: 'GET',
+        method : 'GET',
         headers: {
-            'X-Requested-With': 'XMLHttpRequest',
-            "Authorization": jwt,
+            'X-Requested-With' : 'XMLHttpRequest',
+            "Authorization"    : jwt             ,
         },
         credentials: 'include',
     };

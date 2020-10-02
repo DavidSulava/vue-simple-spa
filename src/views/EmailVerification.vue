@@ -22,8 +22,8 @@ export default {
 
   data() {
     return {
-      snackbar: {show: false, timeout: 3000, snackText : '', color:'success'},
-      path: "/users/email/confirmation?",
+      snackbar : {show: false, timeout: 3000, snackText : '', color:'success'},
+      path     : "/users/email/confirmation?",
     };
   },
   created(){
@@ -32,15 +32,15 @@ export default {
   methods: {
     verifyEmail() {
 
-        let email = this.$route.params.email;
-        let token = this.$route.params.token;
+      let email = this.$route.params.email;
+      let token = this.$route.params.token;
 
-        if (!email || !token) {
-            this.$router.push({ path: "/home" });
-            return;
-        }
+      if (!email || !token) {
+          this.$router.push({ path: "/home" });
+          return;
+      }
 
-        this.$store.dispatch("emailVerifyAction", { path: this.path + `email=${email}&token=${token}` });
+      this.$store.dispatch("emailVerifyAction", { path: this.path + `email=${email}&token=${token}` });
     }
   },
   computed: {
@@ -57,17 +57,17 @@ export default {
 
         if(error){
             this.snackbar.snackText = error;
-            this.snackbar.color = 'error';
-            this.snackbar.timeout = 90000;
-            this.snackbar.show = true;
+            this.snackbar.color     = 'error';
+            this.snackbar.timeout   = 90000;
+            this.snackbar.show      = true;
 
             redirect(5000);
             return
         }
         else if(newState.emailConfirmed){
             this.snackbar.snackText = newState.emailConfirmed;
-            this.snackbar.color = 'success';
-            this.snackbar.show = true;
+            this.snackbar.color     = 'success';
+            this.snackbar.show      = true;
 
             redirect(5000);
             return

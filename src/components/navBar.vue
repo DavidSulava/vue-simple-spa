@@ -1,5 +1,5 @@
 <template>
- <v-container >
+  <v-container >
     <v-app-bar :hide-on-scroll='true' flat class='orange' app>
         <!-- Логотип -->
         <v-toolbar-title class="text-uppercase hidden-xs-only">
@@ -70,18 +70,18 @@
       return {
 
         elText: {
-          btnFormShow: "Войти",
-          btnUserSetting: "Настройки",
-          btnUserExit: "Выйти",
+          btnFormShow    : "Войти"    ,
+          btnUserSetting : "Настройки",
+          btnUserExit    : "Выйти"    ,
         },
-        links:[
+        links :[
           { path: '/home', name: 'Домой' },
           { path: '/bills', name: 'Счета' },
           { path: '/calls', name: 'Звонки' }
         ],
-        loginFormShow: false,
-        userFormShow: false,
-        snackbar: {show: false, timeout: 3000, snackText : '', color:'error'},
+        loginFormShow : false,
+        userFormShow  : false,
+        snackbar      : {show: false, timeout: 3000, snackText : '', color:'error'},
       };
     },
     methods: {
@@ -111,8 +111,8 @@
       getMsgServer(newState){
 
         if(newState && newState.errorCred){
-          this.snackbar.color = 'error';
-          this.snackbar.show = true;
+          this.snackbar.color     = 'error';
+          this.snackbar.show      = true;
           this.snackbar.snackText = newState.errorCred;
         }
       },

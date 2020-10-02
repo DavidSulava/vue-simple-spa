@@ -44,10 +44,10 @@ export default {
   data() {
     return {
       tableHeaders:['Адресс', 'Описание счета', 'Создан', 'Сумма'],
-      pagination:{
-        length: 5,
-        page: 1,
-        totalVisible: 5,
+      pagination  :{
+        length       : 5,
+        page         : 1,
+        totalVisible : 5,
       },
       path:"/bills?page="
     }

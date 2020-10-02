@@ -50,32 +50,32 @@
         name: 'LoginForm',
 
         props: {
-            toRegister: { type: Function },
-            snackbar: Object
+            toRegister : { type: Function },
+            snackbar   : Object
         },
 
         data() {
             return {
-                msgVal: "",
-                passMax:50,
-                minPassLen: 8,
-                allowSpaces: false,
-                elText: {
-                    btnFormShow: "Войти",
-                    btnRegister: "Зарегестрироваться",
+                msgVal      : ""   ,
+                passMax     :50    ,
+                minPassLen  : 8    ,
+                allowSpaces : false,
+                elText      : {
+                    btnFormShow : "Войти"             ,
+                    btnRegister : "Зарегестрироваться",
                 },
-                formData:{email:null, password:null},
-                info: {
-                    success: "Пользователь успешно зарегистрирован 😃",
-                    inputError: "поле не может быть пустым",
-                    emailNotValid: "не валидный почтовый адрес!",
-                    passworError:[
+                formData    : {email:null, password:null},
+                info        : {
+                    success       : "Пользователь успешно зарегистрирован 😃",
+                    inputError    : "поле не может быть пустым"              ,
+                    emailNotValid : "не валидный почтовый адрес!"            ,
+                    passworError  :[
                         'пароль не должен содержать пробелов',
-                        `пароль не может быть больше`,
-                        `пароль должен содержать минимум`,
+                        `пароль не может быть больше`        ,
+                        `пароль должен содержать минимум`    ,
                     ],
                 },
-                path:'/users/login',
+                path        :'/users/login',
             };
         },
         methods:{
@@ -93,7 +93,7 @@
             getMsgServer(newState){
 
                 if( newState && newState.msgServer && newState.msgServer.errorCred ){
-                    this.snackbar.show = true;
+                    this.snackbar.show      = true;
                     this.snackbar.snackText = newState.msg.errorCred;
                 }
             }

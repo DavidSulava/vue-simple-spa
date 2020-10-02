@@ -21,20 +21,19 @@
 import { mapGetters } from "vuex";
 
 export default {
-  name: "UserLoggedForm",
-
-  props: {
+  name  : "UserLoggedForm",
+  props : {
     toRedactProfile: { type: Function },
   },
 
   data() {
     return {
       elText: {
-        btnUserSetting: "Настройки",
-        btnUserExit: "Выйти",
+        btnUserSetting : "Настройки",
+        btnUserExit    : "Выйти"    ,
       },
-      link: "/profileRedact",
-      path: "/users/logOut",
+      link  : "/profileRedact",
+      path  : "/users/logOut" ,
     };
   },
   methods: {
@@ -42,7 +41,6 @@ export default {
       this.$store.dispatch("logOutAction", this.path  );
     },
   },
-  watch: {},
   computed: {
     ...mapGetters(["getUser"]),
   },

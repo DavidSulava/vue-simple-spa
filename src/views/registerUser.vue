@@ -67,26 +67,26 @@ export default {
 
   data() {
     return {
-      msgVal: "",
-      passMax: 50,
-      minPassLen: 8,
-      allowSpaces: false,
-      elText: {
-        btnRegister: "Зарегестрироваться",
-        labelName: "имя",
-        labelLastName: "фамилия",
-        labelEmail: "* эл.почта",
-        labelPassword: "* пароль",
-        labelPassConfirm: "* подтвердить пароль",
+      msgVal      : ""   ,
+      passMax     : 50   ,
+      minPassLen  : 8    ,
+      allowSpaces : false,
+      elText      : {
+        btnRegister      : "Зарегестрироваться"  ,
+        labelName        : "имя"                 ,
+        labelLastName    : "фамилия"             ,
+        labelEmail       : "* эл.почта"          ,
+        labelPassword    : "* пароль"            ,
+        labelPassConfirm : "* подтвердить пароль",
       },
-      formData: {
-        name: null,
-        lastName: null,
-        email: null,
-        password: null,
-        passCompare: null,
+      formData    : {
+        name        : null,
+        lastName    : null,
+        email       : null,
+        password    : null,
+        passCompare : null,
       },
-      info: {
+      info        : {
         success: "Пользователь успешно зарегистрирован 😃",
         inputError: "поле не может быть пустым",
         emailNotValid: "не валидный почтовый адрес!",
@@ -97,8 +97,8 @@ export default {
           "пароли не совпадают",
         ],
       },
-      snackbar: {show: false, timeout: 3000, snackText : '', color:'success'},
-      path: "/users/register",
+      snackbar    : {show: false, timeout: 3000, snackText : '', color:'success'},
+      path        : "/users/register",
     };
   },
   created(){

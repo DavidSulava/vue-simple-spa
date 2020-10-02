@@ -98,39 +98,39 @@ export default {
 
   data() {
     return {
-      passMax: 50,
-      minPassLen: 8,
-      allowSpaces: false,
-      elText: {
-        btnChange: "Изменить",
-        btnVerify: "Подтвердить эл.почту",
-        labelName: "имя",
-        labelLastName: "фамилия",
-        labelEmail: "* эл.почта",
-        labelOldPassword: "* старый пароль",
-        labelNewldPassword: "* новый пароль",
+      passMax     : 50,
+      minPassLen  : 8,
+      allowSpaces : false,
+      elText      : {
+        btnChange          : "Изменить"            ,
+        btnVerify          : "Подтвердить эл.почту",
+        labelName          : "имя"                 ,
+        labelLastName      : "фамилия"             ,
+        labelEmail         : "* эл.почта"          ,
+        labelOldPassword   : "* старый пароль"     ,
+        labelNewldPassword : "* новый пароль"      ,
       },
-      formData: {
-        firstName: '',
-        lastName: '',
-        email: '',
-        oldPassword: '',
-        newldPassword: '',
+      formData    : {
+        firstName     : '',
+        lastName      : '',
+        email         : '',
+        oldPassword   : '',
+        newldPassword : '',
       },
-      info: {
-        inputError: "поле не может быть пустым",
-        emailNotValid: "не валидный почтовый адрес!",
-        inputMaxChars: "поле не может превышать",
-        inputErrorSpases:"поле не может содержать пробелы",
-        passworError: [
+      info        : {
+        inputError       : "поле не может быть пустым"     ,
+        emailNotValid    : "не валидный почтовый адрес!"   ,
+        inputMaxChars    : "поле не может превышать"       ,
+        inputErrorSpases :"поле не может содержать пробелы",
+        passworError     : [
           "пароль не должен содержать пробелов",
-          "пароль не может быть больше",
-          "пароль должен содержать минимум",
-          "пароли не совпадают",
+          "пароль не может быть больше"        ,
+          "пароль должен содержать минимум"    ,
+          "пароли не совпадают"                ,
         ],
       },
-      snackbar: {show: false, timeout: 3000, snackText : '', color:'success'},
-      path: ["/users/updateUser", "/users/newPassword", "/users/email/sendVerification?"],
+      snackbar    : {show: false, timeout: 3000, snackText : '', color:'success'},
+      path        : ["/users/updateUser", "/users/newPassword", "/users/email/sendVerification?"],
     };
   },
   created() {
@@ -207,8 +207,10 @@ export default {
   },
   watch: {
     msgServer(newState) {
-        let msgServer = newState.userUpdated || newState.passUpdated || newState.verLinkSend
+
+        let msgServer     = newState.userUpdated || newState.passUpdated || newState.verLinkSend
         let serverMsgFail = (newState &&  newState.erPassword)? newState.erPassword: null
+
         if ( newState && msgServer) {
             this.snackbar.color = 'success';
             this.snackbar.show = true;
