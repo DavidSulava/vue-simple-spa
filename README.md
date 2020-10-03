@@ -1,4 +1,4 @@
-# Descrption
+# Description
 SPA ( аутентификация через JWT )
 
 ##### Backend Express API 👉 [здесь](https://github.com/DavidSulava/BackEndApiExpressWithSessions/tree/jwt-v)
