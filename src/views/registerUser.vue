@@ -1,5 +1,5 @@
 <template>
-  <v-container class="col-8">
+  <v-container class="col-xs-11 col-md-8">
     <v-form
       ref="regForm"
       class="grey lighten-2 pa-5 rounded elevation-2"
@@ -41,7 +41,7 @@
       ></v-text-field>
 
       <!-- Кнопка регистрации -->
-      <v-container class="d-flex">
+      <v-container class="d-flex justify-center  justify-sm-end">
         <v-btn class="success mt-3" type="submit">{{elText.btnRegister}}</v-btn>
       </v-container>
     </v-form>

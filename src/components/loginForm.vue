@@ -21,10 +21,10 @@
     ></v-text-field>
 
     <!-- Кнопка Войти && Кнопка Зарегестрироваться -->
-    <v-container class="d-flex">
-        <v-btn class="success mt-3" type='submit'>{{elText.btnFormShow}}</v-btn>
-        <v-spacer></v-spacer>
-        <v-btn class="success mt-3" @click="toRegister()">
+    <v-container class="d-flex justify-space-between">
+        <v-btn class="success mt-3  mr-1" small type='submit'>{{elText.btnFormShow}}</v-btn>
+        <!-- <v-spacer></v-spacer> -->
+        <v-btn class="success mt-3 ml-1" small @click="toRegister()">
             {{elText.btnRegister}}
         </v-btn>
     </v-container>

@@ -27,7 +27,7 @@
             :rules="userRules"></v-text-field>
 
         <!-- Кнопка изменить данные -->
-        <v-container class="d-flex">
+        <v-container class="d-flex justify-center  justify-sm-end">
             <v-btn class="success mt-3" type="submit">{{elText.btnChange}}</v-btn>
         </v-container>
     </v-form>
@@ -59,7 +59,7 @@
             ></v-text-field>
 
             <!-- Кнопка изменить данные -->
-            <v-container class="d-flex">
+            <v-container class="d-flex justify-center  justify-sm-end">
                 <v-btn class="success mt-3" type="submit">{{elText.btnChange}}</v-btn>
             </v-container>
     </v-form>
