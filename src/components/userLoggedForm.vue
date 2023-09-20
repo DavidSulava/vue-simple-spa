@@ -25,24 +25,23 @@ export default {
   props : {
     toRedactProfile: { type: Function },
   },
-
   data() {
     return {
       elText: {
-        btnUserSetting : "Настройки",
-        btnUserExit    : "Выйти"    ,
+        btnUserSetting : "Settings",
+        btnUserExit    : "Exit"    ,
       },
       link  : "/profileRedact",
       path  : "/users/logOut" ,
     };
   },
+  computed: {
+    ...mapGetters(["getUser"]),
+  },
   methods: {
     logOut() {
       this.$store.dispatch("logOutAction", this.path  );
     },
-  },
-  computed: {
-    ...mapGetters(["getUser"]),
   },
 };
 </script>

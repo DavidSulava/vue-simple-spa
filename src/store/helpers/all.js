@@ -1,21 +1,18 @@
 export const init_state = {
-    user          : null,
-    msgServer     : null,
-    bills         : null,
-    calls         : null,
-    isDataLoading : false,
+    user: null,
+    msgServer: null,
+    bills: null,
+    calls: null,
+    isDataLoading: false,
 }
-
-
 // -------[ getters ]----------
 export const getUser = state => {
-    return  state.user
+    return state.user
 }
 
 export const getMsgServer = state => {
-    return  state.msgServer
+    return state.msgServer
 }
-
 // -------[ mutations ]----------
 export const checkUserSession = (state, payload = null) => {
     state.user = payload;
@@ -23,34 +20,28 @@ export const checkUserSession = (state, payload = null) => {
 export const login = (state, payload = []) => {
     state.user = payload.user ? payload.user : null;
 }
-export const msgServer = ( state, payload = [] )=>{
-    state.msgServer  = payload ?  payload : state.msgServer  ;
+export const msgServer = (state, payload = []) => {
+    state.msgServer = payload ? payload : state.msgServer;
 }
-export const setBills = ( state, payload = null )=>{
-    state.bills  = payload ;
+export const setBills = (state, payload = null) => {
+    state.bills = payload;
 }
-export const setCalls = ( state, payload = null )=>{
-    state.calls  = payload ;
+export const setCalls = (state, payload = null) => {
+    state.calls = payload;
 }
-export const setIsDataLoading = ( state, manualSet = false  )=>{
-    state.isDataLoading  = manualSet ;
+export const setIsDataLoading = (state, manualSet = false) => {
+    state.isDataLoading = manualSet;
 }
-
-
 // -------[ Actions ]-------
-
 export const checkUserSessionAction = async (context, path = '/users/jwt_refresh') => {
-
-    let corsAPI = `${process.env.VUE_APP_DATA_API}${path}`;
-
+    let corsAPI = `${import.meta.env.VITE_VUE_APP_DATA_API}${path}`;
     const myHeaders = {
-        method : 'GET',
+        method: 'GET',
         headers: {
             'X-Requested-With': 'XMLHttpRequest',
         },
         credentials: 'include',
     };
-
     context.commit('setIsDataLoading', true);
 
     const response = await fetch(corsAPI, myHeaders);
@@ -66,42 +57,39 @@ export const checkUserSessionAction = async (context, path = '/users/jwt_refresh
     }
 
 }
-export const autoRefresh  = async (context ) => {
+export const autoRefresh = async (context) => {
 
-    const { state, dispatch }  = context;
-    const { jwt_time_expires } = state.user
+    const {state, dispatch} = context;
+    const {jwt_time_expires} = state.user
 
-    let timeUntilRefresh = Math.floor( ( jwt_time_expires - Date.now() ) - (1000 * 60 * 1.2) )
+    let timeUntilRefresh = Math.floor((jwt_time_expires - Date.now()) - (1000 * 60 * 1.2))
 
     var waitAlitle = null
-    var refresh    = null
+    var refresh = null
 
-    if( state.isDataLoading ){
+    if (state.isDataLoading) {
         clearTimeout(refresh);
-        waitAlitle =  setTimeout(() => dispatch('autoRefresh'), 2000);
-    }
-    else{
+        waitAlitle = setTimeout(() => dispatch('autoRefresh'), 2000);
+    } else {
         clearTimeout(waitAlitle);
-        refresh=  setTimeout(() => dispatch('checkUserSessionAction' ), timeUntilRefresh );
+        refresh = setTimeout(() => dispatch('checkUserSessionAction'), timeUntilRefresh);
     }
 }
-
 //--логин || регистрация || изменение данных пользователя
 export const loginAction = async (context, payload) => {
+    let corsAPI = `${import.meta.env.VITE_VUE_APP_DATA_API}${payload.path}`;
+    let r_body = payload.form;
 
-    let corsAPI = `${process.env.VUE_APP_DATA_API}${payload.path}`;
-    let r_body  = payload.form;
-
-    let jwt = context.state.user  && context.state.user.jwt
+    let jwt = context.state.user && context.state.user.jwt
 
     const myHeaders = {
-        method : 'POST',
+        method: 'POST',
         headers: {
             'X-Requested-With': 'XMLHttpRequest',
-            "Authorization"   : jwt,
+            "Authorization": jwt,
         },
-        credentials : 'include',
-        body        : r_body
+        credentials: 'include',
+        body: r_body
     };
 
     //--loading
@@ -119,16 +107,15 @@ export const loginAction = async (context, payload) => {
             context.commit('msgServer', data.msg);
             context.commit('setIsDataLoading');
             context.dispatch('autoRefresh');
-        }else if (data.msg && (data.msg.userUpdated )) {
+        } else if (data.msg && (data.msg.userUpdated)) {
             context.commit('login', data);
             context.commit('msgServer', data.msg);
             context.commit('setIsDataLoading');
-        }else if (data.msg && (data.msg.passUpdated )) {
+        } else if (data.msg && (data.msg.passUpdated)) {
             context.commit('login', data);
             context.commit('msgServer', data.msg);
             context.commit('setIsDataLoading');
-        }
-        else if (data.msg && data.msg.contact) {
+        } else if (data.msg && data.msg.contact) {
             context.commit('msgServer', data.msg);
             context.commit('setIsDataLoading');
         } else if (data.msg && data.msg.userDeleted) {
@@ -144,15 +131,14 @@ export const loginAction = async (context, payload) => {
 }
 
 export const logOutAction = async (context, payload) => {
-
-    let corsAPI = `${process.env.VUE_APP_DATA_API}${payload}`;
+    let corsAPI = `${import.meta.env.VITE_VUE_APP_DATA_API}${payload}`;
     let jwt = context.state.user && context.state.user.jwt
 
     const myHeaders = {
-        method : 'GET',
+        method: 'GET',
         headers: {
-            'X-Requested-With' : 'XMLHttpRequest',
-            "Authorization"    : jwt             ,
+            'X-Requested-With': 'XMLHttpRequest',
+            "Authorization": jwt,
         },
         credentials: 'include',
     };
@@ -167,10 +153,10 @@ export const logOutAction = async (context, payload) => {
     if (response.status >= 200 && response.status <= 299) {
         data = await response.json();
 
-        if (data && data.user && data.user == null ) {
+        if (data && data.user && data.user == null) {
             context.commit('login',);
             context.commit('setIsDataLoading');
-        }else {
+        } else {
             context.commit('login');
             context.commit('setIsDataLoading');
         }
@@ -183,56 +169,52 @@ export const logOutAction = async (context, payload) => {
 }
 
 export const emailVerifyAction = async (context, payload) => {
-
-    let corsAPI = `${process.env.VUE_APP_DATA_API}${payload.path}`;
+    let corsAPI = `${import.meta.env.VITE_VUE_APP_DATA_API}${payload.path}`;
     let jwt = context.state.user && context.state.user.jwt
 
     const myHeaders = {
-        method : 'GET',
+        method: 'GET',
         headers: {
-            'X-Requested-With' : 'XMLHttpRequest',
-            "Authorization"    : jwt             ,
+            'X-Requested-With': 'XMLHttpRequest',
+            "Authorization": jwt,
         },
         credentials: 'include',
     };
 
     const response = await fetch(corsAPI, myHeaders);
-    const data     = await response.json();
+    const data = await response.json();
 
     let serverResp = data.msg && data.msg.emailConfirmed || data.msg.timeErr || data.msg.errorCred || data.msg.verLinkSend ? data.msg : false;
 
-    if (data && data.user && serverResp ) {
+    if (data && data.user && serverResp) {
         context.commit('checkUserSession', data.user);
         context.commit('msgServer', serverResp);
-    }else if(!data.user && serverResp ){
+    } else if (!data.user && serverResp) {
         context.commit('checkUserSession');
         context.commit('msgServer', serverResp);
-    }else {
+    } else {
         context.commit('checkUserSession');
     }
 }
 
-
-export const getUserDataAction = async (context, payload ) => {
-
-    let corsAPI = `${process.env.VUE_APP_DATA_API}${payload.path}`;
-    let jwt     = context.state.user && context.state.user.jwt
+export const getUserDataAction = async (context, payload) => {
+    let corsAPI = `${import.meta.env.VITE_VUE_APP_DATA_API}${payload.path}`;
+    let jwt = context.state.user && context.state.user.jwt
 
     const myHeaders = {
-        method : 'GET',
+        method: 'GET',
         headers: {
-            'X-Requested-With' : 'XMLHttpRequest',
-            "Authorization"    : jwt             ,
+            'X-Requested-With': 'XMLHttpRequest',
+            "Authorization": jwt,
         },
         credentials: 'include',
     };
 
     var wait = null
 
-    if( context.state.isDataLoading ){
+    if (context.state.isDataLoading) {
         wait = setTimeout(() => context.dispatch('getUserDataAction', payload), 1000);
-    }
-    else{
+    } else {
         clearTimeout(wait);
 
         //--loading
@@ -244,7 +226,7 @@ export const getUserDataAction = async (context, payload ) => {
         if (data && data.bills) {
             context.commit('setBills', data);
             context.commit('setIsDataLoading');
-        } else if(data && 'calls' in data){
+        } else if (data && 'calls' in data) {
             context.commit('setCalls', data);
             context.commit('setIsDataLoading');
         } else {

@@ -5,31 +5,30 @@ import VueRouter from 'vue-router'
 Vue.use(VueRouter)
 
 const routes = [
-
   {
     path: '/register',
     name: 'RegisterUser',
-    component: () => import(/* webpackChunkName: "about" */ '../views/registerUser.vue')
+    component: () => import('../views/registerUser.vue')
   },
   {
     path: '/profileRedact',
     name: 'RedactProfile',
-    component: () => import(/* webpackChunkName: "about" */ '../views/redactProfile.vue')
+    component: () => import('../views/redactProfile.vue')
   },
   {
     path: '/bills',
     name: 'Bills',
-    component: () => import(/* webpackChunkName: "about" */ '../views/bills.vue')
+    component: () => import('../views/bills.vue')
   },
   {
     path: '/calls',
     name: 'Calls',
-    component: () => import(/* webpackChunkName: "about" */ '../views/calls.vue')
+    component: () => import('../views/calls.vue')
   },
   {
     path: '/email/authentication/:email/:token',
     name: 'EmailVerification',
-    component: () => import(/* webpackChunkName: "about" */ '../views/EmailVerification.vue')
+    component: () => import('../views/EmailVerification.vue')
   }
 ]
 
@@ -37,7 +36,7 @@ const routes = [
 
 const router = new VueRouter({
   mode: 'history',
-  base: process.env.BASE_URL,
+  base: import.meta.env.BASE_URL,
   routes
 })
 
