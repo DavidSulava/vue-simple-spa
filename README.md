@@ -6,7 +6,7 @@ SPA (authentication via JWT)
 You can see the demo 👉 [here](https://davidsulava.github.io/vue-simple-spa/)
 
 __login__: admin@gmail.com\
-__password__: 11111111
+__password__: 12345678
 
 Implemented by using __Vue js__
 

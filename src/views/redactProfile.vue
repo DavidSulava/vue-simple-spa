@@ -101,6 +101,7 @@
         passMax: 50,
         minPassLen: 8,
         allowSpaces: false,
+        notChangeableEmail: 'admin@gmail.com',
         elText: {
           btnChange: "Change",
           btnVerify: "Confirm email",
@@ -118,6 +119,7 @@
           newldPassword: '',
         },
         info: {
+          demoDataError: 'demo account data can`t be changed',
           inputError: "field cannot be empty",
           emailNotValid: "invalid email!",
           inputMaxChars: "field cannot be greater",
@@ -158,12 +160,14 @@
 
           rules.push(minPassLen);
         }
+        rules.push(() => this.formData.email !== this.notChangeableEmail || this.info.demoDataError);
         return rules;
       },
       emailRules() {
         const eRules = [
           (v) => !!v || this.info.inputError,
           (v) => /.+@.+\..+/.test(v) || this.info.emailNotValid,
+          (v) => v !== this.notChangeableEmail || this.info.demoDataError,
         ];
         return eRules;
       },

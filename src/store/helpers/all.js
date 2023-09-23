@@ -55,17 +55,15 @@ export const checkUserSessionAction = async (context, path = '/users/jwt_refresh
         context.commit('checkUserSession');
         context.commit('setIsDataLoading');
     }
-
 }
 export const autoRefresh = async (context) => {
-
     const {state, dispatch} = context;
     const {jwt_time_expires} = state.user
 
     let timeUntilRefresh = Math.floor((jwt_time_expires - Date.now()) - (1000 * 60 * 1.2))
 
-    var waitAlitle = null
-    var refresh = null
+    let waitAlitle = null
+    let refresh = null
 
     if (state.isDataLoading) {
         clearTimeout(refresh);
@@ -129,7 +127,6 @@ export const loginAction = async (context, payload) => {
         context.commit('setIsDataLoading');
     }
 }
-
 export const logOutAction = async (context, payload) => {
     let corsAPI = `${import.meta.env.VITE_VUE_APP_DATA_API}${payload}`;
     let jwt = context.state.user && context.state.user.jwt
@@ -167,7 +164,6 @@ export const logOutAction = async (context, payload) => {
         context.commit('setIsDataLoading');
     }
 }
-
 export const emailVerifyAction = async (context, payload) => {
     let corsAPI = `${import.meta.env.VITE_VUE_APP_DATA_API}${payload.path}`;
     let jwt = context.state.user && context.state.user.jwt
@@ -196,7 +192,6 @@ export const emailVerifyAction = async (context, payload) => {
         context.commit('checkUserSession');
     }
 }
-
 export const getUserDataAction = async (context, payload) => {
     let corsAPI = `${import.meta.env.VITE_VUE_APP_DATA_API}${payload.path}`;
     let jwt = context.state.user && context.state.user.jwt

@@ -1,7 +1,6 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 
-
 Vue.use(VueRouter)
 
 const routes = [
@@ -14,6 +13,11 @@ const routes = [
     path: '/profileRedact',
     name: 'RedactProfile',
     component: () => import('../views/redactProfile.vue')
+  },
+  {
+    path: '/home',
+    name: 'Home',
+    component: () => import('../views/home.vue')
   },
   {
     path: '/bills',
@@ -32,13 +36,10 @@ const routes = [
   }
 ]
 
-
-
 const router = new VueRouter({
   mode: 'history',
   base: import.meta.env.BASE_URL,
   routes
 })
-
 
 export default router

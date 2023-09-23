@@ -37,7 +37,6 @@
         <span>{{ elText.btnFormShow }}</span>
         <v-icon>mdi-login</v-icon>
       </v-btn>
-
       <!-- Показать форму залогиненного Пользователя -->
       <v-btn
         v-else-if="user"
@@ -113,7 +112,6 @@ export default {
   },
   watch: {
     getMsgServer(newState) {
-
       if (newState && newState.errorCred) {
         this.snackbar.color = 'error';
         this.snackbar.show = true;
