@@ -199,7 +199,7 @@
         }
       },
       user(newState) {
-        if (!newState) this.$router.push({path: "/home"});
+        if (!newState) this.$router.push({path: "/"});
         this.formData = {...this.formData, ...newState}
       },
     },

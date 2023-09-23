@@ -159,7 +159,7 @@ export default {
     },
     user(newState){
       if(newState && 'email' in newState)
-        this.$router.push({ path: '/home' });
+        this.$router.push({ path: '/' });
     }
   },
   created(){

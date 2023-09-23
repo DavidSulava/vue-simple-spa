@@ -76,7 +76,7 @@ export default {
   watch: {
     user(newState) {
       if (!newState)
-        this.$router.push({path: "/home"});
+        this.$router.push({path: "/"});
     }
   },
   created() {

@@ -89,7 +89,7 @@ export default {
         btnUserExit: "Exit",
       },
       links: [
-        {path: '/home', name: 'Home'},
+        {path: '/', name: 'Home'},
         {path: '/bills', name: 'Invoices'},
         {path: '/calls', name: 'Calls'}
       ],

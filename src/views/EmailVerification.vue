@@ -32,7 +32,7 @@ export default {
       let error = newState.errorCred || newState.timeErr;
       var redirect = (time) => {
         setTimeout(() => {
-          this.$router.push({path: "/home"});
+          this.$router.push({path: "/"});
         }, time);
       }
 
@@ -65,7 +65,7 @@ export default {
       let token = this.$route.params.token;
 
       if (!email || !token) {
-        this.$router.push({path: "/home"});
+        this.$router.push({path: "/"});
         return;
       }
       this.$store.dispatch("emailVerifyAction", {path: this.path + `email=${email}&token=${token}`});
