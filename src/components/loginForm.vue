@@ -26,6 +26,7 @@
       <v-btn
         class="success mt-3  mr-1"
         small
+        :loading="isLoading"
         type="submit"
       >
         {{ elText.btnFormShow }}
@@ -34,6 +35,7 @@
       <v-btn
         class="success mt-3 ml-1"
         small
+        :disabled="isLoading"
         @click="toRegister()"
       >
         {{ elText.btnRegister }}
@@ -67,6 +69,7 @@ export default {
       passMax: 50,
       minPassLen: 8,
       allowSpaces: false,
+      isLoading: false,
       elText: {
         btnFormShow: "Login",
         btnRegister: "Sign-up",
@@ -121,14 +124,19 @@ export default {
     }
   },
   methods: {
-    login() {
+    async login() {
+      this.isLoading = true;
       this.snackbar.snackText = '';
       if (!this.$refs.loginForm.validate())
         return
 
       let formD = new FormData(this.$refs.loginForm.$el);
 
-      this.$store.dispatch('loginAction', {path: this.path, form: formD});
+      try {
+        await this.$store.dispatch('loginAction', {path: this.path, form: formD});
+      } finally {
+        this.isLoading = false;
+      }
     },
   },
 }
