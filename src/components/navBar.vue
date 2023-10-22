@@ -1,7 +1,12 @@
 <template>
   <v-container>
-    <v-app-bar :hide-on-scroll="true" flat class="orange" app>
-      <!-- Логотип -->
+    <v-app-bar
+      :hide-on-scroll="true"
+      flat
+      class="orange"
+      app
+    >
+      <!-- Logo -->
       <v-toolbar-title class="text-uppercase hidden-xs-only">
         <i>Express</i>
         <span class="font-weight-black">
@@ -26,45 +31,48 @@
           </v-list-item-content>
         </v-list-item>
       </v-list>
-      <v-spacer></v-spacer>
-      <!-- Показать форму -->
+      <v-spacer />
+      <!-- Login button -->
       <v-btn
         v-if="!user"
         class="success"
         depressed
-        @click="loginFormShow =! loginFormShow"
+        @click="toggleLoginForm"
       >
         <span>{{ elText.btnFormShow }}</span>
         <v-icon>mdi-login</v-icon>
       </v-btn>
-      <!-- Показать форму залогиненного Пользователя -->
+      <!-- Logged user icon -->
       <v-btn
         v-else-if="user"
         class="success"
         fab
         small
         depressed
-        @click="userFormShow =! userFormShow"
+        @click="toggleUserForm"
       >
         <v-icon>mdi-account-box</v-icon>
       </v-btn>
-      <!-- Форма логина -->
+      <!-- Login form -->
       <v-dialog
-          v-if="!user"
-          v-model="loginFormShow"
-          opacity="0.20"
-          width="500px"
+        v-show="!user"
+        v-model="isLoginFormShow"
+        opacity="0.20"
+        width="500px"
       >
-        <LoginForm :toRegister="toRegister" :snackbar="snackbar"/>
+        <LoginForm
+          :snackbar="snackbar"
+          @on-close="toggleLoginForm"
+        />
       </v-dialog>
-      <!-- Форма залогиненого Пользователя -->
+      <!-- Uer logged form -->
       <v-dialog
-        v-else-if="user"
-        v-model="userFormShow"
+        v-show="user"
+        v-model="isUserFormShow"
         :hide-overlay="true"
         width="400px"
       >
-        <UserLoggedForm :toRedactProfile="toRedactProfile" />
+        <UserLoggedForm @on-close="toggleUserForm" />
       </v-dialog>
     </v-app-bar>
   </v-container>
@@ -93,8 +101,8 @@ export default {
         {path: '/bills', name: 'Invoices'},
         {path: '/calls', name: 'Calls'}
       ],
-      loginFormShow: false,
-      userFormShow: false,
+      isLoginFormShow: false,
+      isUserFormShow: false,
       snackbar: {show: false, timeout: 3000, snackText: '', color: 'error'},
     };
   },
@@ -118,17 +126,14 @@ export default {
         this.snackbar.snackText = newState.errorCred;
       }
     },
-
   },
   methods: {
-    toRegister() {
-      this.$router.push({path: '/register'});
-      this.loginFormShow = false;
+    toggleLoginForm() {
+      this.isLoginFormShow = !this.isLoginFormShow;
     },
-    toRedactProfile() {
-      this.$router.push({path: '/profileRedact'});
-      this.userFormShow = false;
-    }
+    toggleUserForm() {
+      this.isUserFormShow = !this.isUserFormShow;
+    },
   },
 }
 </script>

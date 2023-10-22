@@ -3,7 +3,7 @@
     class="align-center w-25"
     style="width: 900px"
   >
-    <h2>Welcome to my portfolio website, showcasing my skills in Vue.js and Vuetify!</h2>
+    <h2>Welcome to Vue.js and Vuetify demo website!</h2>
     <br />
     <p>
       <i>

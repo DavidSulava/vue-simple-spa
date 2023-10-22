@@ -4,7 +4,7 @@
     class="white pa-4"
     @submit.prevent="login"
   >
-    <!-- Эл.почта -->
+    <!-- Email -->
     <v-text-field
       v-model="formData.email"
       name="email"
@@ -12,7 +12,7 @@
       required
       :rules="emailRules"
     />
-    <!-- Пароль -->
+    <!-- Password -->
     <v-text-field
       v-model="formData.password"
       name="password"
@@ -21,7 +21,7 @@
       type="password"
       :rules="passRules"
     />
-    <!-- Кнопка Войти && Кнопка Зарегестрироваться -->
+    <!-- Button Login && Button Sign-up -->
     <v-container class="d-flex justify-space-between">
       <v-btn
         class="success mt-3  mr-1"
@@ -36,7 +36,7 @@
         class="success mt-3 ml-1"
         small
         :disabled="isLoading"
-        @click="toRegister()"
+        @click="toRegister"
       >
         {{ elText.btnRegister }}
       </v-btn>
@@ -60,11 +60,15 @@ import {mapGetters} from 'vuex';
 export default {
   name: 'LoginForm',
   props: {
-    toRegister: {type: Function},
-    snackbar: Object
+    snackbar: {
+      type: Object,
+      default: () => {},
+    },
   },
+  emits: ['on-close'],
   data() {
     return {
+      isFormLoading: false,
       msgVal: "",
       passMax: 50,
       minPassLen: 8,
@@ -108,11 +112,10 @@ export default {
       return rules
     },
     emailRules() {
-      const eRules = [
+      return [
         v => !!v || this.info.inputError,
         v => /.+@.+\..+/.test(v) || this.info.emailNotValid,
       ]
-      return eRules
     },
   },
   watch: {
@@ -124,6 +127,10 @@ export default {
     }
   },
   methods: {
+    toRegister() {
+      this.$router.push({path: '/register'});
+      this.$emit('on-close');
+    },
     async login() {
       this.snackbar.snackText = '';
       if (!this.$refs.loginForm.validate()) {
@@ -134,6 +141,7 @@ export default {
       try {
         this.isLoading = true;
         await this.$store.dispatch('loginAction', {path: this.path, form: formD});
+        this.$emit('on-close');
       } finally {
         this.isLoading = false;
       }
